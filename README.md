@@ -6,3 +6,4 @@ With this preject I have covered:
 1. Props
 2. State
 3. Router
+4. Use of dark mode and light mode
