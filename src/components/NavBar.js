@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom"; // Use Link, not link
 
 export default function NavBar(props) {
   return (
@@ -7,9 +8,9 @@ export default function NavBar(props) {
       className={`navbar navbar-expand-lg bg-${props.Mode} navbar-${props.Mode}`}
     >
       <div className="container-fluid">
-        <a className="navbar-brand text-light" href="/">
+        <Link className="navbar-brand text-light" to="/">
           {props.title}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -24,14 +25,14 @@ export default function NavBar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active text-light" aria-current="page" href="/">
+              <Link className="nav-link active text-light" to="/">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-light" href="/">
+              <Link className="nav-link text-light" to="/about">
                 About
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="form-check form-switch">
@@ -42,7 +43,10 @@ export default function NavBar(props) {
               id="flexSwitchCheckDefault"
               onClick={props.toggleMode}
             />
-            <label className="form-check-label text-light" htmlFor="flexSwitchCheckDefault">
+            <label
+              className="form-check-label text-light"
+              htmlFor="flexSwitchCheckDefault"
+            >
               Enable DarkMode
             </label>
           </div>

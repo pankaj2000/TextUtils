@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
 import Alert from "./components/Alert";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [Mode, ModeState] = useState("danger");
@@ -22,33 +23,37 @@ function App() {
     if (Mode === "danger") {
       ModeState("dark");
       document.body.style.backgroundColor = "#0c184c";
-       showAlert("success","Dark mode has been enabled successfully!!");
-      //  document.title = "TextUtils - Dark Mode";
-       setInterval(() => {
-        document.title = "TextUtils - Dark Mode";
-      }, 2000);
-      setInterval(() => {
-        document.title = "TextUtils - Keep using it.";
-      }, 1500);
+      showAlert("success", "Dark mode has been enabled successfully!!");
+      document.title = "TextUtils - Dark Mode";
     } else {
       ModeState("danger");
       document.body.style.backgroundColor = "white";
-       showAlert("success","Light mode has been enabled successfully!!");
-       document.title = "TextUtils - Light Mode";
+      showAlert("success", "Light mode has been enabled successfully!!");
+      document.title = "TextUtils - Light Mode";
     }
-  }
-
-    return (
-      <React.Fragment>
-        <NavBar title="TextUtils" Mode={Mode} toggleMode={toggleMode} />
-        <Alert alert={alert}/>
-        <div className="container">
-          <TextForm heading="Enter you text below to analyse" Mode={Mode} showAlert = {showAlert}/>
-          {/* <About/> */}
-        </div>
-      </React.Fragment>
-    );
   };
 
+  return (
+    <Router>
+      <NavBar title="TextUtils" Mode={Mode} toggleMode={toggleMode} />
+      <Alert alert={alert} />
+      <div className="container">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TextForm
+                heading="Enter your text below to analyze"
+                Mode={Mode}
+                showAlert={showAlert}
+              />
+            }
+          />
+          <Route path="/about" element={<About Mode={Mode}/>} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 export default App;
